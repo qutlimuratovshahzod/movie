@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const Movie = ({ movies }) => {
 
   const { id } = useParams()
-
+  const navigate = useNavigate()
   let movie = movies.filter(item => item.id === +id)[0]
 
-  if(!movie) return <button className='btn loading'>loading</button>
+  if (!movie) return <button className='btn loading'>loading</button>
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
@@ -27,7 +27,8 @@ export const Movie = ({ movies }) => {
             <li>Lenguage: <strong>{movie.original_language}</strong></li>
           </ul>
           <div className="divider mt-10"></div>
-          <p>"Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."</p>
+          <p>{movie.overview}</p>
+          <button onClick={() => navigate(-1)} className='btn btn-info mt-10 text-lg shadow-md' >Go Back</button>
         </div>
       </div>
     </div>
